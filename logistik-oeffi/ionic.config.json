@@ -1,0 +1,7 @@
+{
+  "name": "logistik-oeffi",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

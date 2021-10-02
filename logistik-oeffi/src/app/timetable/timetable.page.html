@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title><img class="logo" [routerLink]="['/start']" src="/assets/logo.svg" width="25" height="25">timetable</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col><h1 class="title">Haltestelle Deichtorhallen:</h1></ion-col>
+    </ion-row>
+    <ion-row class="timetable--outline">
+      <ion-col size="12" class="timetable">
+        <ion-row>
+          <!-- <ion-col size="3">Linie</ion-col> -->
+          <ion-col>Linie</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let ride of rides" [routerLink]="['/line', ride.type,  ride.line]">
+          <ion-col>
+            <ion-row>
+              <ion-col>
+                <!-- <ion-badge class="product product--{{ride.type}}"><img width="20" height="20" src="/assets/{{vehicles[ride.type].image}}"></ion-badge> -->
+                <ion-badge color="primary" class="line line--{{ride.type}} product--{{ride.type}}"><img *ngIf="vehicles[ride.type].image" width="15" height="15" src="/assets/{{vehicles[ride.type].image}}"><div class="line-number"><span class="">{{vehicles[ride.type].prefix}}</span>{{ride.line}}</div> </ion-badge><ion-badge class="line--target">{{ride.target}}</ion-badge>
+              </ion-col>
+            </ion-row>
+            
+           </ion-col>
+          
+          <ion-col>
+            <ion-row>
+              <ion-col>
+                <span *ngIf="ride.type == 'cargo'">
+                  <ion-icon  *ngFor="let number of getArray(ride.capacity)" name="cube" class="capacity--{{capacity[ride.capacity].value}}"></ion-icon>
+                </span>
+                <span *ngIf="ride.type != 'cargo'">
+                  <ion-icon *ngFor="let number of getArray(ride.capacity)" name="person"  class="capacity--{{capacity[ride.capacity].value}}"></ion-icon> 
+                </span>
+                &nbsp;<span class="capacity--text">{{capacity[ride.capacity].text}}</span></ion-col>
+              <ion-col>in {{ride.time}}min</ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
